@@ -30,6 +30,8 @@ namespace Class
             }
         }
 
+        public float DamageInterval { set; get; }
+
         public Weapon(string name = "Weapon")
         {
             Name = name;
@@ -62,6 +64,9 @@ namespace Class
                 _maxDamage = 10f;
                 Console.WriteLine($"\nФорсированная установка Максимального Урона: {_maxDamage}");
             }
+
+            _interval = new Interval(_minDamage, _maxDamage);
+            
         }
 
         public float GetDamage()
@@ -69,10 +74,9 @@ namespace Class
             return (_maxDamage + _minDamage) / 2;
         }
 
-        public float GetDamageInterval()
+        public void GetDamageInterval()
         {
-            _interval = new Interval(_minDamage, _maxDamage);
-            return _interval.Get;
+            DamageInterval = _interval.Get;
         }
     }
 }

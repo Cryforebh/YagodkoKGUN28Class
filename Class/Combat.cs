@@ -86,12 +86,12 @@ namespace Class
                 if (randomInt % 2 == 0)
                 {
                     unit2.SetDamage(unit1.Damage);
-                    rate = new Rate(unit1, unit1.Damage, unit2.Health);
+                    rate = new Rate(unit1, unit1.DamageRecorded, unit2.Health);
                 }
                 else
                 {
                     unit1.SetDamage(unit2.Damage);
-                    rate = new Rate(unit2, unit2.Damage, unit1.Health);
+                    rate = new Rate(unit2, unit2.DamageRecorded, unit1.Health);
                 }
                 rates.Add(rate);
             }
@@ -103,7 +103,7 @@ namespace Class
             foreach (Rate rate in rates)
             {
                 Console.WriteLine($"Боец {rate.Unit.Name} нанёс урон {rate.Damage} и оставил {rate.Health} здоровья.");
-                //rate.Unit.DamageSkip();
+                rate.Unit.DamageAbsorbed();
             }
 
         }

@@ -10,6 +10,7 @@ namespace Class
     {
         private float _health;
         private float _baseDamage = 5f;
+        private float _damage;
         private Weapon _weapon;
         private Helm _helm;
         private Shell _shell;
@@ -19,17 +20,21 @@ namespace Class
 
         public float Health => _health;
 
-        public float Damage
+        public float Damage // возвращаем сумму базового урона и урона от оружия если оно есть
         {
             get
             {
+                _weapon.GetDamageInterval();
                 if (_weapon != null)
                 {
-                    return _baseDamage + _weapon.GetDamageInterval(); // возвращаем сумму базового урона и урона от оружия если оно есть
+                    _damage = _baseDamage + _weapon.DamageInterval; 
+                    return _damage; 
                 }
-                else { return _baseDamage; }
+                else { _damage = _baseDamage; return _damage; }
             }
         }
+
+        public float DamageRecorded => _damage; // возвращаем уже фиксированный урон 
 
         public float Armor
         {
@@ -121,11 +126,13 @@ namespace Class
             Console.WriteLine($"{_boots.Name} - экипировано!");
         }
 
-        public void DamageSkip()
+        public void DamageAbsorbed() // Поглащенно урона
         {
-            var damageSkip = Damage - (Damage / (1f + Armor));
-            Console.WriteLine($"Поглащенно урона - {damageSkip}.\n");
+            var damageSkip = DamageRecorded - (DamageRecorded / (1f + Armor));
+            Console.WriteLine($"Поглощено урона от брони: {damageSkip}.\n");
         }
+
+
 
         public void Info()
         {
