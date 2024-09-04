@@ -71,7 +71,6 @@ namespace Class
                     value = (float)Math.Round(value, 2);
                     return value;
                 }
-
             }
         }
 
@@ -131,8 +130,6 @@ namespace Class
             var damageSkip = DamageRecorded - (DamageRecorded / (1f + Armor));
             Console.WriteLine($"Поглощено урона от брони: {damageSkip}.\n");
         }
-
-
 
         public void Info()
         {
